@@ -54,8 +54,8 @@ los demas campos deben ser Strig
 No hace falta enviar todos los campos, se puede enviar solo el cambio que desea cambiarse.
 
 Ejemplo para cambiar stock
-
+<pre>
 {
     "stock": 800
-}
+}</pre>
 
