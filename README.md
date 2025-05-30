@@ -93,3 +93,5 @@ el body para agregar un producto a un carrrito es (ejemplo)
 }</pre>
 
 <h2> NOTA: EL file productos_original.json es un file que conservo para obtener datos. el script conversionDeDatos lo uso para obtener un json mas manejable </h2>
+
+<h2> NOTA: Se incluye la collection de postman con la que se probo el proyecto </h2>
