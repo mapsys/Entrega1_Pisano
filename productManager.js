@@ -4,7 +4,7 @@ export default class ProductManager {
   constructor(ruta) {
     this.products = [];
     this.currentId = 0;
-    this.file = join( ruta, "productos.json");
+    this.file = join(ruta, "productos.json");
   }
 
   async #loadProducts() {
@@ -14,7 +14,7 @@ export default class ProductManager {
       this.currentId = this.products.length > 0 ? this.products[this.products.length - 1].id : 0;
     } catch (error) {
       if (error.code === "ENOENT") {
-        console.log("El archivo no existe, se creara vacio");
+        console.log("El archivo de productos no existe, se creara vacio");
         this.products = [];
         this.currentId = 0;
         await fs.writeFile(this.file, JSON.stringify([], null, 2));
@@ -76,7 +76,7 @@ export default class ProductManager {
       throw new Error("Producto no encontrado");
     }
     return product;
-  };
+  }
 
   updateProduct(id, updatedFields) {
     const productIndex = this.products.findIndex((p) => p.id === id);
@@ -91,7 +91,7 @@ export default class ProductManager {
     }
     this.#saveProducts();
     return product;
-  };
+  }
 
   deleteProduct(id) {
     const productIndex = this.products.findIndex((p) => p.id === id);
@@ -101,5 +101,17 @@ export default class ProductManager {
     this.products.splice(productIndex, 1);
     this.#saveProducts();
     return this.products;
-  };
+  }
+
+  hasProductStock(id, qty) {
+  const productIndex = this.products.findIndex((p) => p.id === id);
+    if (productIndex === -1) {
+      throw new Error("Producto no encontrado");
+    }
+    const product = this.products[productIndex];
+    if (product.stock < qty) {
+      throw new Error("No hay suficiente stock");
+    }
+    return true;
+  }
 }
