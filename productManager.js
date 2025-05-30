@@ -1,13 +1,10 @@
 import fs from "fs/promises";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { join } from "path";
 export default class ProductManager {
   constructor(ruta) {
     this.products = [];
     this.currentId = 0;
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-    this.file = join(__dirname, ruta, "productos.json");
+    this.file = join( ruta, "productos.json");
   }
 
   async #loadProducts() {
@@ -70,13 +67,39 @@ export default class ProductManager {
     };
     this.products.push(newProduct);
     this.#saveProducts();
+    return newProduct;
   }
 
   getProductById(id) {
     const product = this.products.find((p) => p.id === id);
     if (!product) {
-      return {}
+      throw new Error("Producto no encontrado");
     }
     return product;
-  }
+  };
+
+  updateProduct(id, updatedFields) {
+    const productIndex = this.products.findIndex((p) => p.id === id);
+    if (productIndex === -1) {
+      throw new Error("Producto no encontrado");
+    }
+    const product = this.products[productIndex];
+    for (const key in updatedFields) {
+      if (key !== "id" && key in product) {
+        product[key] = updatedFields[key];
+      }
+    }
+    this.#saveProducts();
+    return product;
+  };
+
+  deleteProduct(id) {
+    const productIndex = this.products.findIndex((p) => p.id === id);
+    if (productIndex === -1) {
+      throw new Error("Producto no encontrado");
+    }
+    this.products.splice(productIndex, 1);
+    this.#saveProducts();
+    return this.products;
+  };
 }

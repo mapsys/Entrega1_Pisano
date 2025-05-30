@@ -95,25 +95,43 @@
     "price": 100,
     "thumbnail": "thumbnail.jpg",
     "title": "Nuevo Producto",
-    "code": "NP000003",
+    "code": "NP00590003",
     "stock": 50
   },
   {
     "id": 12,
-    "description": "Nuevo Producto",
+    "description": "un simple producto para testear la api",
     "price": 100,
-    "thumbnail": "thumbnail.jpg",
-    "title": "Nuevo Producto",
-    "code": "NP0080003",
-    "stock": 50
+    "thumbnail": "http://http2.mlstatic.com/D_738318-MLU72027189565_092023-I.jpg",
+    "title": "Testeando la api",
+    "code": "NEW001",
+    "stock": 60
   },
   {
     "id": 13,
-    "description": "Nuevo Producto",
+    "description": "un simple producto para testear la api",
     "price": 100,
-    "thumbnail": "thumbnail.jpg",
-    "title": "Nuevo Producto",
-    "code": "NP0090003",
-    "stock": 50
+    "thumbnail": "http://http2.mlstatic.com/D_738318-MLU72027189565_092023-I.jpg",
+    "title": "Testeando la api",
+    "code": "NEW002",
+    "stock": 60
+  },
+  {
+    "id": 14,
+    "description": "un simple producto para testear la api",
+    "price": 100,
+    "thumbnail": "http://http2.mlstatic.com/D_738318-MLU72027189565_092023-I.jpg",
+    "title": "Testeando la api",
+    "code": "NEW003",
+    "stock": 60
+  },
+  {
+    "id": 15,
+    "description": "un simple producto para testear la api",
+    "price": 100,
+    "thumbnail": "http://http2.mlstatic.com/D_738318-MLU72027189565_092023-I.jpg",
+    "title": "Testeando la api",
+    "code": "NEW004",
+    "stock": 60
   }
 ]
