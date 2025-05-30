@@ -56,17 +56,23 @@ export default class ProductManager {
     if (typeof description !== "string" || typeof title !== "string" || typeof thumbnail !== "string" || typeof code !== "string") {
       throw new Error("Los campos de descripción, título, miniatura y código deben ser cadenas de texto");
     }
+
     const newProduct = {
       id: ++this.currentId,
       description,
       price,
-      thumbnail,
+      thumbnails: [thumbnail],
       title,
       code,
       stock,
+      status: true,
     };
+    if (stock === 0) {
+      newProduct.status = false;
+    }
+
     this.products.push(newProduct);
-    this.#saveProducts();
+    await this.#saveProducts();
     return newProduct;
   }
 
@@ -78,7 +84,7 @@ export default class ProductManager {
     return product;
   }
 
-  updateProduct(id, updatedFields) {
+  async updateProduct(id, updatedFields) {
     const productIndex = this.products.findIndex((p) => p.id === id);
     if (productIndex === -1) {
       throw new Error("Producto no encontrado");
@@ -89,27 +95,27 @@ export default class ProductManager {
         product[key] = updatedFields[key];
       }
     }
-    this.#saveProducts();
+    await this.#saveProducts();
     return product;
   }
 
-  deleteProduct(id) {
+  async deleteProduct(id) {
     const productIndex = this.products.findIndex((p) => p.id === id);
     if (productIndex === -1) {
       throw new Error("Producto no encontrado");
     }
     this.products.splice(productIndex, 1);
-    this.#saveProducts();
+    await this.#saveProducts();
     return this.products;
   }
 
   hasProductStock(id, qty) {
-  const productIndex = this.products.findIndex((p) => p.id === id);
+    const productIndex = this.products.findIndex((p) => p.id === id);
     if (productIndex === -1) {
       throw new Error("Producto no encontrado");
     }
     const product = this.products[productIndex];
-    if (product.stock < qty) {
+    if (!product.status) {
       throw new Error("No hay suficiente stock");
     }
     return true;

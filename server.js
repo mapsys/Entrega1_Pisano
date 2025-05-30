@@ -53,7 +53,7 @@ app.put("/api/products/:id", async (req, res) => {
   const { id } = req.params;
   const updatedFields = req.body;
   try {
-    const updatedProduct = productManager.updateProduct(Number(id), updatedFields);
+    const updatedProduct = await productManager.updateProduct(Number(id), updatedFields);
     return res.status(200).json(updatedProduct);
   } catch (error) {
     return res.status(404).json({ error: error.message });
@@ -61,10 +61,10 @@ app.put("/api/products/:id", async (req, res) => {
 });
 
 // Eliminar un producto
-app.delete("/api/products/:id", (req, res) => {
+app.delete("/api/products/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    productManager.deleteProduct(Number(id));
+    await productManager.deleteProduct(Number(id));
     return res.status(200).json({ message: "Producto eliminado correctamente", productos: productManager.getProducts() });
   } catch (error) {
     return res.status(404).json({ error: error.message });
@@ -94,11 +94,7 @@ app.post("/api/carts/:cid/products/:pid", async (req, res) => {
   }
   const { cid, pid } = req.params;
   try {
-    const existencia = productManager.hasProductStock(Number(pid), qty);
-  } catch (error) {
-    return res.status(404).json({ error: error.message });
-  }
-  try {
+    productManager.hasProductStock(Number(pid), qty);
     const cart = await cartManager.addProductToCart(Number(cid), Number(pid), qty);
     return res.status(200).json(cart);
   } catch (error) {

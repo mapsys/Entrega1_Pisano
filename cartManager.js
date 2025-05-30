@@ -43,7 +43,7 @@ export default class CartManager {
   getCartById(id) {
     const cart = this.carts.find((p) => p.id === id);
     if (!cart) {
-      throw new Error("Producto no encontrado");
+      throw new Error("Carrito no encontrado");
     }
     return cart;
   }
@@ -54,12 +54,12 @@ export default class CartManager {
       products: [],
     };
     this.carts.push(newCart);
-    this.#saveCarts();
+    await this.#saveCarts();
     return newCart;
   }
 
-  addProductToCart(cartId, productId, qty) {
-    if (!cartId || !productId || qty <= 0) {
+  async addProductToCart(cartId, productId, qty) {
+    if (!cartId || !productId || typeof qty !== "number" || qty <= 0) {
       throw new Error("Todos los campos son obligatorios y la cantidad debe ser mayor a 0");
     }
     const cartIndex = this.carts.findIndex((p) => p.id === cartId);
@@ -76,7 +76,7 @@ export default class CartManager {
       // Si no existe, lo agrego con la cantidad especificada
       cart.products.push({ id: productId, qty });
     }
-    this.#saveCarts();
+    await this.#saveCarts();
     return cart;
   }
 }
