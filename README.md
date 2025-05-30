@@ -34,7 +34,7 @@ La clase productos maneja el array de productos, el cual se persiste en el direc
 <h5>Agregar un producto</h5>
 
 el body para agregar un producto es (ejemplo)
-<pre> ```json
+<pre>
 {
     "thumbnail": "http://http2.mlstatic.com/D_738318-MLU72027189565_092023-I.jpg",
     "title": "Testeando la api",
@@ -42,7 +42,7 @@ el body para agregar un producto es (ejemplo)
     "price": 100,
     "stock": 60,
     "code": "NEW004"
-}``` </pre>
+}</pre>
 
 Todos los campos son obligatorios
 Price y Stock deben ser numericos y positivos
