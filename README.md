@@ -91,3 +91,6 @@ el body para agregar un producto a un carrrito es (ejemplo)
 {
     "qty": 10
 }</pre>
+
+
+<h2> NOTA: EL file productos_original.json es un file que conservo para obtener datos </h2>
